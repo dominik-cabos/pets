@@ -16,6 +16,8 @@ import { RegisterComponent } from './components/register/register.component';
 import {PET_API_BASE_URL} from './modules/pets';
 import {environment} from '../environments/environment';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {HTTP_INTERCEPTORS} from '@angular/common/http';
+import {ApiInterceptor} from './http/api.interceptor';
 
 export function PetApiBaseUrlFactory(): string {
   return  environment.petApiBaseUrl + (environment.petApiBaseUrl.endsWith('/') ? '' : '/');
@@ -41,7 +43,13 @@ export function PetApiBaseUrlFactory(): string {
     MatListModule,
     MatSnackBarModule
   ],
-  providers: [{provide: PET_API_BASE_URL, useFactory: PetApiBaseUrlFactory}],
+  providers: [{provide: PET_API_BASE_URL, useFactory: PetApiBaseUrlFactory},
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ApiInterceptor,
+      multi: true
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
