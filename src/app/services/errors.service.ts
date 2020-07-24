@@ -11,7 +11,9 @@ export class ErrorsService {
   private errors$ = new Subject<string>();
 
   httpError(error: HttpErrorResponse): void {
-    this.errors$.next('Your request couldn\'t be completed. Please try again later.');
+    this.errors$.next(
+      'Your request couldn\'t be completed. Please try again later.'
+    );
     this.log(error);
   }
 

@@ -1,21 +1,23 @@
-import {TestBed, async, ComponentFixture} from '@angular/core/testing';
-import {RouterTestingModule, SpyNgModuleFactoryLoader} from '@angular/router/testing';
+import { TestBed, async, ComponentFixture } from '@angular/core/testing';
+import {
+  RouterTestingModule,
+  SpyNgModuleFactoryLoader,
+} from '@angular/router/testing';
 import { AppComponent } from './app.component';
-import {ErrorsService} from '../../services/errors.service';
-import {LoginComponent, LoginService} from '../../modules/users';
-import {Router, RouterOutlet} from '@angular/router';
-import {EMPTY, of} from 'rxjs';
-import {MatSnackBar} from '@angular/material/snack-bar';
-import {NgModuleFactoryLoader, NO_ERRORS_SCHEMA} from '@angular/core';
-import {BreakpointObserver} from '@angular/cdk/layout';
-import {Location, LocationStrategy} from '@angular/common';
-import {MockLocationStrategy, SpyLocation} from '@angular/common/testing';
-import {RegisterComponent, SearchComponent} from '../../modules/pets';
-import {AuthGuard} from '../../helpers/router.guard';
-import {ReactiveFormsModule} from '@angular/forms';
+import { ErrorsService } from '../../services/errors.service';
+import { LoginComponent, LoginService } from '../../modules/users';
+import { Router, RouterOutlet } from '@angular/router';
+import { EMPTY, of } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { NgModuleFactoryLoader, NO_ERRORS_SCHEMA } from '@angular/core';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { Location, LocationStrategy } from '@angular/common';
+import { MockLocationStrategy, SpyLocation } from '@angular/common/testing';
+import { RegisterComponent, SearchComponent } from '../../modules/pets';
+import { AuthGuard } from '../../helpers/router.guard';
+import { ReactiveFormsModule } from '@angular/forms';
 
 describe('AppComponent', () => {
-
   let app: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
   let router: Router;
@@ -23,19 +25,22 @@ describe('AppComponent', () => {
   const mockErrorService = jasmine.createSpyObj(['httpError', 'getErrors']);
   const mockLoginService = jasmine.createSpyObj(['getLoggedUser', 'logout']);
   const mockSnackBar = jasmine.createSpyObj(['open']);
-  const mockBreakpointObserver =  jasmine.createSpyObj(['observe']);
+  const mockBreakpointObserver = jasmine.createSpyObj(['observe']);
   mockBreakpointObserver.observe.and.returnValue(of(true));
 
-  const MOCK_USER = {username: 'dominik', password: 'ABCxyz123'};
+  const MOCK_USER = { username: 'dominik', password: 'ABCxyz123' };
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule.withRoutes( [
-        {path: 'find', component: SearchComponent},
-        {path: 'register', component: RegisterComponent},
-        {path: 'login', component: LoginComponent},
-        { path: '',   redirectTo: '/find', pathMatch: 'full' },
-      ]), ReactiveFormsModule],
+      imports: [
+        RouterTestingModule.withRoutes([
+          { path: 'find', component: SearchComponent },
+          { path: 'register', component: RegisterComponent },
+          { path: 'login', component: LoginComponent },
+          { path: '', redirectTo: '/find', pathMatch: 'full' },
+        ]),
+        ReactiveFormsModule,
+      ],
       declarations: [AppComponent],
       providers: [
         { provide: ErrorsService, useValue: mockErrorService },
@@ -45,8 +50,6 @@ describe('AppComponent', () => {
       ],
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
-
-
   }));
 
   beforeEach(() => {
@@ -89,7 +92,4 @@ describe('AppComponent', () => {
     app.logout();
     expect(mockLoginService.logout).toHaveBeenCalled();
   });
-
-
-
 });

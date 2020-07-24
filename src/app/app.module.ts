@@ -11,27 +11,30 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
-import {PET_API_BASE_URL} from './modules/pets';
-import {environment} from '../environments/environment';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
-import {HTTP_INTERCEPTORS} from '@angular/common/http';
-import {ApiInterceptor} from './helpers/api.interceptor';
-import {UsersModule} from './modules/users/users.module';
-import {USER_API_BASE_URL} from './modules/users';
+import { PET_API_BASE_URL } from './modules/pets';
+import { environment } from '../environments/environment';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ApiInterceptor } from './helpers/api.interceptor';
+import { UsersModule } from './modules/users/users.module';
+import { USER_API_BASE_URL } from './modules/users';
 
 export function PetApiBaseUrlFactory(): string {
-  return  environment.petApiBaseUrl + (environment.petApiBaseUrl.endsWith('/') ? '' : '/');
+  return (
+    environment.petApiBaseUrl +
+    (environment.petApiBaseUrl.endsWith('/') ? '' : '/')
+  );
 }
 
 export function UserApiBaseUrlFactory(): string {
-  return  environment.userApiBaseUrl + (environment.userApiBaseUrl.endsWith('/') ? '' : '/');
+  return (
+    environment.userApiBaseUrl +
+    (environment.userApiBaseUrl.endsWith('/') ? '' : '/')
+  );
 }
 
-
 @NgModule({
-  declarations: [
-    AppComponent,
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -47,16 +50,16 @@ export function UserApiBaseUrlFactory(): string {
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-    MatSnackBarModule
+    MatSnackBarModule,
   ],
   providers: [
-    {provide: PET_API_BASE_URL, useFactory: PetApiBaseUrlFactory},
-    {provide: USER_API_BASE_URL, useFactory: UserApiBaseUrlFactory},
-    {provide: 'DEFAULT_PET_IMAGE', useValue: environment.defaultPetImage},
+    { provide: PET_API_BASE_URL, useFactory: PetApiBaseUrlFactory },
+    { provide: USER_API_BASE_URL, useFactory: UserApiBaseUrlFactory },
+    { provide: 'DEFAULT_PET_IMAGE', useValue: environment.defaultPetImage },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: ApiInterceptor,
-      multi: true
+      multi: true,
     },
   ],
   bootstrap: [AppComponent],

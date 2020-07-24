@@ -1,18 +1,22 @@
-import {Component, InjectionToken, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, FormGroupDirective, Validators} from '@angular/forms';
-import {LoginService} from '../../services/login/login.service';
+import { Component, InjectionToken, OnInit } from '@angular/core';
+import {
+  FormBuilder,
+  FormGroup,
+  FormGroupDirective,
+  Validators,
+} from '@angular/forms';
+import { LoginService } from '../../services/login/login.service';
 
 @Component({
   selector: 'user-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-
   constructor(
     private formBuilder: FormBuilder,
     private loginService: LoginService
-  ) { }
+  ) {}
 
   loginForm: FormGroup;
   spinner: boolean;
@@ -50,8 +54,7 @@ export class LoginComponent implements OnInit {
       this.spinner = true;
       this.loginForm.disable();
       this.notAuthenticated = false;
-    }
-    else {
+    } else {
       this.spinner = false;
       this.loginForm.enable();
     }

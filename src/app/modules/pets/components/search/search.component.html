@@ -4,10 +4,12 @@
   <mat-card-content>
     <div>
       <mat-form-field>
-        <input class="query-box" matInput placeholder="Pet Id"
+        <input
+          class="query-box"
+          matInput
+          placeholder="Pet Id"
           [formControl]="queryBox"
         />
-
       </mat-form-field>
     </div>
   </mat-card-content>
@@ -27,19 +29,16 @@
 </mat-card>
 
 <ng-container *ngIf="foundPet">
-
   <mat-toolbar-row class="success result">A pet has been found</mat-toolbar-row>
 
   <mat-card class="found-pet">
     <mat-card-header>
-      <img mat-card-avatar
-          [src]="foundPet.avatar"
-      />
+      <img mat-card-avatar [src]="foundPet.avatar" />
       <mat-card-title>
-          {{foundPet.name | titlecase}}
+        {{ foundPet.name | titlecase }}
       </mat-card-title>
       <mat-card-subtitle *ngIf="foundPet.category">
-          {{foundPet.category.name}}
+        {{ foundPet.category.name }}
       </mat-card-subtitle>
     </mat-card-header>
   </mat-card>

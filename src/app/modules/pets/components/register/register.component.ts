@@ -1,9 +1,13 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, FormGroupDirective, Validators, } from '@angular/forms';
+import { Component, Input, OnInit } from '@angular/core';
+import {
+  FormBuilder,
+  FormGroup,
+  FormGroupDirective,
+  Validators,
+} from '@angular/forms';
 
-import {PetHttpService} from '../../services/pet-http/pet-http.service';
-import {Pet} from '../../models/pet';
-
+import { PetHttpService } from '../../services/pet-http/pet-http.service';
+import { Pet } from '../../models/pet';
 
 @Component({
   selector: 'pet-register',
@@ -25,14 +29,13 @@ export class RegisterComponent implements OnInit {
   }
 
   register(formDirective: FormGroupDirective): void {
-
     this.petService.register(this.petForm.value).subscribe(
       (petRegistered) => {
         this.registeredPet = petRegistered;
         formDirective.resetForm();
       },
       () => {
-          this.loading(false);
+        this.loading(false);
       },
       () => {
         this.loading(false);
@@ -53,8 +56,7 @@ export class RegisterComponent implements OnInit {
     if (start) {
       this.spinner = true;
       this.petForm.disable();
-    }
-    else {
+    } else {
       this.spinner = false;
       this.petForm.enable();
     }

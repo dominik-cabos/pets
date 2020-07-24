@@ -1,8 +1,8 @@
-import {Component, Inject, Input, OnInit} from '@angular/core';
-import {PetHttpService} from '../../services/pet-http/pet-http.service';
-import {Pet} from '../../models/pet';
-import {FormBuilder, FormControl} from '@angular/forms';
-import {map} from 'rxjs/operators';
+import { Component, Inject, Input, OnInit } from '@angular/core';
+import { PetHttpService } from '../../services/pet-http/pet-http.service';
+import { Pet } from '../../models/pet';
+import { FormBuilder, FormControl } from '@angular/forms';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'pet-search',
@@ -10,12 +10,11 @@ import {map} from 'rxjs/operators';
   styleUrls: ['./search.component.scss'],
 })
 export class SearchComponent implements OnInit {
-
   constructor(
     private formBuilder: FormBuilder,
     private petService: PetHttpService,
-    @Inject('DEFAULT_PET_IMAGE') private defaultPetImage: string,
-) {}
+    @Inject('DEFAULT_PET_IMAGE') private defaultPetImage: string
+  ) {}
 
   queryBox: FormControl;
   notFound404: boolean;
@@ -27,28 +26,26 @@ export class SearchComponent implements OnInit {
   }
 
   find(): void {
-
     this.loading();
 
-    this.petService.find(this.queryBox.value).pipe(
-      map(pet => this.setAvatar(pet))
-    ).subscribe(
-      (petFound) => {
-        this.foundPet = petFound;
-
-      },
-      (error) => {
-        if (error.status === 404) {
-          this.foundPet = null;
-          this.notFound404 = true;
+    this.petService
+      .find(this.queryBox.value)
+      .pipe(map((pet) => this.setAvatar(pet)))
+      .subscribe(
+        (petFound) => {
+          this.foundPet = petFound;
+        },
+        (error) => {
+          if (error.status === 404) {
+            this.foundPet = null;
+            this.notFound404 = true;
+            this.loading(false);
+          }
+        },
+        () => {
           this.loading(false);
         }
-      },
-      () => {
-        this.loading(false);
-      }
-    );
-
+      );
   }
 
   private initForm(): void {
@@ -61,23 +58,25 @@ export class SearchComponent implements OnInit {
       this.queryBox.disable();
       this.notFound404 = false;
       this.foundPet = null;
-    }
-    else {
+    } else {
       this.spinner = false;
       this.queryBox.enable();
     }
   }
 
-  private setAvatar(pet: Pet): Pet{
+  private setAvatar(pet: Pet): Pet {
     let avatar;
 
-    if (pet.photoUrls && pet.photoUrls[0] && pet.photoUrls[0].startsWith('http')) {
+    if (
+      pet.photoUrls &&
+      pet.photoUrls[0] &&
+      pet.photoUrls[0].startsWith('http')
+    ) {
       avatar = pet.photoUrls[0];
-    }
-    else {
+    } else {
       avatar = this.defaultPetImage;
     }
 
-    return {avatar, ...pet};
+    return { avatar, ...pet };
   }
 }

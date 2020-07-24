@@ -1,11 +1,11 @@
-import {async, ComponentFixture, TestBed, } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import {SearchComponent} from './search.component';
-import {DebugElement, NO_ERRORS_SCHEMA} from '@angular/core';
-import {PetHttpService} from '../..';
-import {By} from '@angular/platform-browser';
-import {of, throwError} from 'rxjs';
-import {ReactiveFormsModule} from '@angular/forms';
+import { SearchComponent } from './search.component';
+import { DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
+import { PetHttpService } from '../..';
+import { By } from '@angular/platform-browser';
+import { of, throwError } from 'rxjs';
+import { ReactiveFormsModule } from '@angular/forms';
 
 describe('SearchComponent', () => {
   let component: SearchComponent;
@@ -81,10 +81,12 @@ describe('SearchComponent', () => {
   });
 
   it('should create', () => {
-    mockPetService.find.and.returnValue(of({
-      ...MOCK_PET,
-      photoUrls: [GIVEN_PET_IMG],
-    }));
+    mockPetService.find.and.returnValue(
+      of({
+        ...MOCK_PET,
+        photoUrls: [GIVEN_PET_IMG],
+      })
+    );
     component.queryBox.setValue(1);
     fixture.detectChanges();
     submitButton.click();

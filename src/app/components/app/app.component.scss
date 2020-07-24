@@ -20,26 +20,27 @@
     flex: 1 1 auto;
   }
   .logged-user {
-    margin-right:16px;
+    margin-right: 16px;
   }
 }
 
 .bottom-info {
-  position : absolute;
-  bottom : 36px;
-  height:44px;
+  position: absolute;
+  bottom: 36px;
+  height: 44px;
   display: flex;
   flex-direction: column;
   align-content: center;
   align-items: center;
   justify-content: space-between;
-  img {width:60%}
+  img {
+    width: 60%;
+  }
 }
 
 .brand-header {
-  height:100px;
-  h1
-  {
-    font-size:28px;
+  height: 100px;
+  h1 {
+    font-size: 28px;
   }
 }

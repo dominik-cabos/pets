@@ -1,22 +1,22 @@
-import {TestBed} from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 
-import {PET_API_BASE_URL, PetHttpService} from './pet-http.service';
-import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
+import { PET_API_BASE_URL, PetHttpService } from './pet-http.service';
+import {
+  HttpClientTestingModule,
+  HttpTestingController,
+} from '@angular/common/http/testing';
 
 describe('PetHttpService', () => {
   let service: PetHttpService;
   let httpTestingController: HttpTestingController;
 
-  const MOCK_REGISTRATION = { id: '1234567890' , name: 'Lili' };
+  const MOCK_REGISTRATION = { id: '1234567890', name: 'Lili' };
   const MOCK_PET = { id: 1234567890, name: 'Lili' };
-
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [
-        {provide: PET_API_BASE_URL, useValue: ''},
-      ]
+      providers: [{ provide: PET_API_BASE_URL, useValue: '' }],
     });
     service = TestBed.inject(PetHttpService);
     httpTestingController = TestBed.inject(HttpTestingController);
@@ -47,5 +47,4 @@ describe('PetHttpService', () => {
     const req = httpTestingController.expectOne('pet');
     req.flush(MOCK_REGISTRATION);
   });
-
 });
