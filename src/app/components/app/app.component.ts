@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import { Observable } from 'rxjs';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { map, shareReplay } from 'rxjs/operators';
+import {map, shareReplay, tap} from 'rxjs/operators';
 import { ErrorsService } from '../../services/errors.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {LoginService, User} from '../../modules/users';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +19,13 @@ export class AppComponent implements OnInit {
     private errors: ErrorsService,
     private breakpointObserver: BreakpointObserver,
     private snackbar: MatSnackBar,
+    private loginService: LoginService,
+    private router: Router
   ) {}
+
+  loggedUser$: Observable<User>;
+
+  @ViewChild('drawer') drawer;
 
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
@@ -27,9 +35,14 @@ export class AppComponent implements OnInit {
     );
 
   ngOnInit(): void {
+
     this.errors.getErrors().subscribe((e) => {
       this.handleError(e);
     });
+
+    this.loggedUser$ = this.loginService.getLoggedUser().pipe(tap(user => {
+      this.router.navigate(user ? ['/'] : ['/login']);
+    }));
   }
 
   private handleError(e): void {
@@ -39,4 +52,10 @@ export class AppComponent implements OnInit {
       duration: 5000,
     });
   }
+
+  logout(): void{
+    this.loginService.logout();
+  }
+
+
 }

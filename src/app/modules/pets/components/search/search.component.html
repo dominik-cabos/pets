@@ -1,0 +1,50 @@
+<mat-card>
+  <mat-card-title>Find Pet</mat-card-title>
+
+  <mat-card-content>
+    <div>
+      <mat-form-field>
+        <input class="query-box" matInput placeholder="Pet Id"
+          [formControl]="queryBox"
+        />
+
+      </mat-form-field>
+    </div>
+  </mat-card-content>
+
+  <mat-card-actions class="action-buttons">
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="find()"
+      type="submit"
+      [disabled]="!queryBox.value"
+    >
+      Search
+    </button>
+    <mat-spinner class="small" [diameter]="24" *ngIf="spinner"></mat-spinner>
+  </mat-card-actions>
+</mat-card>
+
+<ng-container *ngIf="foundPet">
+
+  <mat-toolbar-row class="success result">A pet has been found</mat-toolbar-row>
+
+  <mat-card class="found-pet">
+    <mat-card-header>
+      <img mat-card-avatar
+          [src]="foundPet.avatar"
+      />
+      <mat-card-title>
+          {{foundPet.name | titlecase}}
+      </mat-card-title>
+      <mat-card-subtitle *ngIf="foundPet.category">
+          {{foundPet.category.name}}
+      </mat-card-subtitle>
+    </mat-card-header>
+  </mat-card>
+</ng-container>
+
+<mat-toolbar-row class="error result" *ngIf="notFound404">
+  A pet couldn't be found
+</mat-toolbar-row>

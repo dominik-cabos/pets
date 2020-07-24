@@ -1,4 +1,37 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+$bg-success: #c6e0c6;
+$bg-error: #ffc6b8;
+
+// todo: move to material themes
+
+mat-toolbar-row.result {
+  height: 48px;
+
+  &.success {
+    background: $bg-success;
+  }
+  &.error {
+    background: $bg-error;
+  }
+}
+
+mat-spinner.small {
+  display: inline-block ;
+  margin: 6px 0 0 12px ;
+}
+
+mat-card-actions.action-buttons {
+  display: flex;
+  margin-bottom:-4px !important;
+  margin-left:-4px;
+}

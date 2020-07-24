@@ -1,0 +1,35 @@
+<form
+  [formGroup]="petForm"
+  novalidate
+  (ngSubmit)="register(formDirective)"
+  #formDirective="ngForm"
+>
+  <mat-card>
+    <mat-card-title>Register Pet</mat-card-title>
+
+    <mat-card-content>
+      <div>
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Name" formControlName="name" />
+        </mat-form-field>
+      </div>
+    </mat-card-content>
+
+    <mat-card-actions class="action-buttons">
+      <button
+        mat-raised-button
+        [disabled]="petForm.invalid"
+        color="primary"
+        type="submit"
+      >
+        Submit
+      </button>
+      <mat-spinner class="small" [diameter]="24" *ngIf="spinner"></mat-spinner>
+    </mat-card-actions>
+  </mat-card>
+</form>
+
+<mat-toolbar-row class="success result" *ngIf="registeredPet">
+  You have registered {{ registeredPet.name }} with id
+  {{ registeredPet.id }}
+</mat-toolbar-row>

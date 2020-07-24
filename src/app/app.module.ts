@@ -11,31 +11,37 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
-import { SearchComponent } from './components/search/search.component';
-import { RegisterComponent } from './components/register/register.component';
 import {PET_API_BASE_URL} from './modules/pets';
 import {environment} from '../environments/environment';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
-import {ApiInterceptor} from './http/api.interceptor';
+import {ApiInterceptor} from './helpers/api.interceptor';
+import {UsersModule} from './modules/users/users.module';
+import {USER_API_BASE_URL} from './modules/users';
 
 export function PetApiBaseUrlFactory(): string {
   return  environment.petApiBaseUrl + (environment.petApiBaseUrl.endsWith('/') ? '' : '/');
 }
 
+export function UserApiBaseUrlFactory(): string {
+  return  environment.userApiBaseUrl + (environment.userApiBaseUrl.endsWith('/') ? '' : '/');
+}
+
+
 @NgModule({
   declarations: [
     AppComponent,
-    SearchComponent,
-    RegisterComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    PetsModule,
     BrowserAnimationsModule,
-    MatSliderModule,
     LayoutModule,
+
+    PetsModule,
+    UsersModule,
+
+    MatSliderModule,
     MatToolbarModule,
     MatButtonModule,
     MatSidenavModule,
@@ -43,7 +49,10 @@ export function PetApiBaseUrlFactory(): string {
     MatListModule,
     MatSnackBarModule
   ],
-  providers: [{provide: PET_API_BASE_URL, useFactory: PetApiBaseUrlFactory},
+  providers: [
+    {provide: PET_API_BASE_URL, useFactory: PetApiBaseUrlFactory},
+    {provide: USER_API_BASE_URL, useFactory: UserApiBaseUrlFactory},
+    {provide: 'DEFAULT_PET_IMAGE', useValue: environment.defaultPetImage},
     {
       provide: HTTP_INTERCEPTORS,
       useClass: ApiInterceptor,

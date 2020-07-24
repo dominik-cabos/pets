@@ -10,8 +10,36 @@
   background: inherit;
 }
 
-.mat-toolbar.mat-primary {
-  position: sticky;
-  top: 0;
-  z-index: 1;
+.mat-toolbar {
+  &.mat-primary {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+  .spacer {
+    flex: 1 1 auto;
+  }
+  .logged-user {
+    margin-right:16px;
+  }
+}
+
+.bottom-info {
+  position : absolute;
+  bottom : 36px;
+  height:44px;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  justify-content: space-between;
+  img {width:60%}
+}
+
+.brand-header {
+  height:100px;
+  h1
+  {
+    font-size:28px;
+  }
 }
