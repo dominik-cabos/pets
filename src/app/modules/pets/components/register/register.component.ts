@@ -29,7 +29,7 @@ export class RegisterComponent implements OnInit {
   }
 
   register(formDirective: FormGroupDirective): void {
-    this.petService.register(this.petForm.value).subscribe(
+    this.petService.register(this.addCategory(this.petForm)).subscribe(
       (petRegistered) => {
         this.registeredPet = petRegistered;
         formDirective.resetForm();
@@ -49,6 +49,7 @@ export class RegisterComponent implements OnInit {
     this.petForm = this.formBuilder.group({
       id: null,
       name: [null, Validators.required],
+      category : [null],
     });
   }
 
@@ -60,5 +61,13 @@ export class RegisterComponent implements OnInit {
       this.spinner = false;
       this.petForm.enable();
     }
+  }
+
+  private addCategory(petForm: FormGroup): Pet {
+    const petWithCategory = {...petForm.value};
+    if (petForm.value.category) {
+      petWithCategory.category = {name : petForm.value.category};
+    }
+    return petWithCategory;
   }
 }

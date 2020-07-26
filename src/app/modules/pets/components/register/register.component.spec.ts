@@ -15,7 +15,7 @@ describe('RegisterComponent', () => {
 
   const mockPetService = jasmine.createSpyObj(['register']);
   const MOCK_REGISTRATION = { id: '1234567890', name: 'Lili' };
-  const MOCK_PET = { name: 'Lili' };
+  const MOCK_PET = { name: 'Lili', category: {name: 'Sausage Dog'} };
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -41,11 +41,22 @@ describe('RegisterComponent', () => {
   it('should display a confirmation when the service returns a confirmation', () => {
     mockPetService.register.and.returnValue(of(MOCK_REGISTRATION));
     component.petForm.controls.name.setValue(MOCK_PET.name);
+
     fixture.detectChanges();
     submitButton.click();
     fixture.detectChanges();
     getUIState();
     expect(successMessage).toBeTruthy();
+
+    component.petForm.controls.name.setValue(MOCK_PET.name);
+    component.petForm.controls.category.setValue(MOCK_PET.category);
+
+    fixture.detectChanges();
+    submitButton.click();
+    fixture.detectChanges();
+    getUIState();
+    expect(successMessage).toBeTruthy();
+
   });
 
   it('should not display a confirmation if there\'s been an error during the request', () => {

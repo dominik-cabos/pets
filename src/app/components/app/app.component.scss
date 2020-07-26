@@ -26,15 +26,17 @@
 
 .bottom-info {
   position: absolute;
-  bottom: 36px;
-  height: 44px;
+  bottom: 40px;
+  height: 60px;
   display: flex;
   flex-direction: column;
   align-content: center;
   align-items: center;
   justify-content: space-between;
+
   img {
     width: 60%;
+    margin-bottom:7px;
   }
 }
 
