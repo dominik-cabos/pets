@@ -26,11 +26,11 @@ export class LoginComponent implements OnInit {
     this.initForm();
   }
 
-  login(formDirective: FormGroupDirective): void {
+  login(): void {
     this.loading();
     this.loginService.authenticate(this.loginForm.value).subscribe(
       (response) => {
-        formDirective.resetForm();
+        this.loginForm.reset();
       },
       (error) => {
         this.loading(false);

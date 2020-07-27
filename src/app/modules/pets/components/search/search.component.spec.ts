@@ -24,7 +24,7 @@ describe('SearchComponent', () => {
     TestBed.configureTestingModule({
       declarations: [SearchComponent],
       imports: [ReactiveFormsModule],
-      schemas: [NO_ERRORS_SCHEMA],
+      schemas: [   NO_ERRORS_SCHEMA],
       providers: [
         { provide: PetHttpService, useValue: mockPetService },
         { provide: 'DEFAULT_PET_IMAGE', useValue: DEFAULT_PET_IMG },
